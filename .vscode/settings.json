@@ -4,7 +4,7 @@
     "**/.pytest_cache/": true,
     "**/.mypy_cache/": true,
     "**/.venv/": false, 
-    "**/__init__.py": false, 
+    "**/__init__.py": true, 
     "**/.env/": false,
     "**/.vscode/": false  
   },
