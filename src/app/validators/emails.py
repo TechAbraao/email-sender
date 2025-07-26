@@ -1,4 +1,4 @@
-from src.app.schemas.emails import EmailBody
+from src.app.schemas.emails_schemas import EmailBody
 from marshmallow import ValidationError
 
 class EmailsValidator():

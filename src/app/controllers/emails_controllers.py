@@ -1,6 +1,6 @@
 from flask import jsonify
 from src.app.validators.emails import EmailsValidator
-from src.app.services.emails import EmailsService
+from src.app.services.emails_services import EmailsService
 
 class EmailsController():
     """ This file contains the EmailsController class which handles email-related operations. """
@@ -21,4 +21,4 @@ class EmailsController():
         if not sending_email[0]:
             return jsonify({"success": False, "error": sending_email[1]["error"]}), 500
         
-        return jsonify(errors_or_email), 200
+        return jsonify(sending_email), 200

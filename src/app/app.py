@@ -1,5 +1,5 @@
 from flask import Flask
-from src.app.blueprints.routes.emails import emails
+from src.app.blueprints.routes.emails_routes import emails
 
 def create_app():
     app = Flask(__name__)

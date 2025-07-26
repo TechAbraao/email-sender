@@ -6,7 +6,7 @@ class EmailsService:
     def __init__(self): 
         self.email_settings = EmailSettings()
     
-    def send_email(self, email_body: dict) -> tuple:
+    def send_email(self, email_body: dict) -> tuple[bool, dict[str, str]]:
         """ Sends an email using the provided email body. """
         subject = email_body.get('subject', '')
         to = email_body.get('to', '')
@@ -27,7 +27,7 @@ class EmailsService:
             server.send_message(msg)
             server.quit()
             
-            return True, {"success": True, "message": "Email sent successfully"}
+            return True, {"message": "Email sent successfully"}
         except Exception as err:
             return False, {"error": str(err)}
         

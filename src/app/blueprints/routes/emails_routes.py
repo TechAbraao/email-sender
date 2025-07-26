@@ -1,7 +1,8 @@
 from flask import Blueprint, request
-from src.app.controllers.emails import EmailsController
+from src.app.controllers.emails_controllers import EmailsController
 
-emails = Blueprint('emails', __name__, url_prefix='/api/emails')
+prefix = '/api/emails'
+emails = Blueprint('emails', __name__, url_prefix=prefix)
 controller = EmailsController()
 
 """  Route to send an e-mail """
