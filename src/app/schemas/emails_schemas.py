@@ -1,32 +1,13 @@
 from marshmallow import Schema, fields
 from marshmallow.validate import Length
-from datetime import datetime
 
 class EmailBody(Schema):
     """ Schema for the body of an e-mail """
-    subject = fields.Str(
-        required=True, 
-        validate=Length(min=6, max=40),
-        metadata={"description": "Subject of the e-mail"}
-        )
-    body = fields.Str(
-        required=True, 
-        validate=Length(min=20, max=300),
-        metadata={"description": "Body content of the e-mail"}
-        )
-    content_type = fields.Str(
-        required=True, 
-        validate=lambda x: x in ["text/plain", "text/html"], 
-        metadata={"description": "MIME type of the body: 'text/plain' or 'text/html'"}
-        )
+    subject = fields.Str(required=True, validate=Length(min=6, max=40), metadata={"description": "Subject of the e-mail"})
+    body = fields.Str(required=True, validate=Length(min=20, max=300), metadata={"description": "Body content of the e-mail"})
+    content_type = fields.Str(required=True, validate=lambda x: x in ["text/plain", "text/html"], metadata={"description": "MIME type of the body: 'text/plain' or 'text/html'"})
     to = fields.Email(required=True, metadata={"description": "Recipient's e-mail address"})
-    """
-    sent_at = fields.DateTime(
-        dump_only=True, 
-        metadata={"description": "Timestamp when the e-mail was sent"},
-        dump_default=datetime.utcnow,
-    )
-    """
+
     def to_dict(self):
         """ Convert the schema to a dictionary representation """
         return {
@@ -34,5 +15,4 @@ class EmailBody(Schema):
             "body": self.body,
             "content_type": self.content_type,
             "to": self.to,
-            # "sent_at": self.sent_at.isoformat() if self.sent_at else None
         }

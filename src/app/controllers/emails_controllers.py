@@ -21,4 +21,7 @@ class EmailsController():
         if not sending_email[0]:
             return jsonify({"success": False, "error": sending_email[1]["error"]}), 500
         
-        return jsonify(sending_email), 200
+        
+        
+        return jsonify(sending_email[1]), 200
+    
