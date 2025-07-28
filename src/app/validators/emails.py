@@ -18,6 +18,7 @@ class EmailsValidator():
         except ValidationError as error:
             return False, error.messages
 
+    """ Validate the subject of the email """
     def validate_content_type(self, content_type: str) -> bool:
         """
         Validate the content type of the email body.

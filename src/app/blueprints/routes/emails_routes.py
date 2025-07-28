@@ -13,3 +13,4 @@ def send_email(): return controller.send_email(request.get_json())
 def schedule_email():
     """ Route to schedule an e-mail (not implemented yet) """
     return {"message": "This feature is not implemented yet"}, 501
+
