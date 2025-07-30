@@ -21,6 +21,7 @@
 | Method | URL                                         | Description                    |
 | ------ | ------------------------------------------- | ------------------------------ |
 | GET    | `/api/emails`                               | Get all emails                 |
+| GET    | `/api/emails?status=<status>`               | Get all emails with status     |
 | GET    | `/api/emails/<string:email_id>`             | Retrieve specific email        |
 | POST   | `/api/emails/send`                          | Send email                     |
 | POST   | `/api/emails/schedule`                      | Schedule email sending         |
