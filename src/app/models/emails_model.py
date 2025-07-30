@@ -26,3 +26,16 @@ class EmailsModel(Base):
     status = Column(SQLAlchemyEnum(EmailStatus), default=EmailStatus.SENT, nullable=False)
     task_id = Column(UUID, nullable=True, unique=True)
     created_at = Column(DateTime, nullable=False)
+    
+    def to_dict(self):
+        return {
+            "id": str(self.id),
+            "subject": self.subject,
+            "to": self.to,
+            "body": self.body,
+            "content_type": self.content_type.value,
+            "scheduled_for": self.scheduled_for.isoformat() if self.scheduled_for else None,
+            "status": self.status.value,
+            "task_id": str(self.task_id) if self.task_id else None,
+            "created_at": self.created_at.isoformat()
+        }

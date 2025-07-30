@@ -8,17 +8,19 @@ prefix = '/api/emails'
 emails = Blueprint('emails', __name__, url_prefix=prefix)
 controller = EmailsController()
 
+""" Get all emails, including sent and scheduled. """
+@emails.route('', methods=['GET'])
+def get_all_emails(): 
+    status = request.args.get("status", default=None)
+    # to = request.args.get("to", None)
+    
+    return controller.get_all_emails(status=status)
+
 """  Route to send an e-mail """
 @emails.route('/send', methods=['POST'])
 def post_send_email(): return controller.send_email(request.get_json())
 
 """ Route to send an schedule e-mail """
 @emails.route('/schedule', methods=['POST'])
-def get_schedule_email(): return controller.send_scheduled_email(request.get_json())
-
-@emails.route('/schedule', methods=['POST'])
-def post_schedule_email():
-    """ Route to schedule an e-mail (not implemented yet) """
-    return {"message": "This feature is not implemented yet"}, 501
-
+def post_schedule_email(): return controller.send_scheduled_email(request.get_json())
 

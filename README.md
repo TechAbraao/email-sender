@@ -20,11 +20,11 @@
 
 | Method | URL                                         | Description                    |
 | ------ | ------------------------------------------- | ------------------------------ |
+| GET    | `/api/emails`                               | Get all emails                 |
+| GET    | `/api/emails/<string:email_id>`             | Retrieve specific email        |
 | POST   | `/api/emails/send`                          | Send email                     |
 | POST   | `/api/emails/schedule`                      | Schedule email sending         |
-| GET    | `/api/emails/schedule`                      | List scheduled or sent emails  |
 | DELETE | `/api/emails/schedule/<string:schedule_id>` | Cancel scheduled email sending |
-| GET    | `/api/emails/<string:email_id>`             | Retrieve specific email        |
 
 #### To start Celery with the Flower UI:
 ```bash

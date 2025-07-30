@@ -81,3 +81,27 @@ class EmailsController():
             return jsonify({"success": saving_email_record[0], "error": saving_email_record[1]}), 500
         
         return jsonify({"message": "E-mail sent successfully."}), 200
+
+    """ Get all scheduled and sent emails """
+    def get_all_emails(self, status): 
+        if not status:
+            all_emails = self.repository.get_all(status=None)
+            
+            if isinstance(all_emails, tuple) and all_emails[0] is False:
+                return jsonify({"success": False, "error": all_emails[1]}), 500
+            
+            if not all_emails:
+                return jsonify({"success": False, "error": "No emails found"}), 404
+            
+            return jsonify({"success": True, "emails": [email.to_dict() for email in all_emails]}), 200
+        else:
+            all_emails_with_status = self.repository.get_all(status=status)
+            
+            if isinstance(all_emails_with_status, tuple) and all_emails_with_status[0] is False:
+               return jsonify({"success": False, "error": all_emails_with_status[1]}), 500
+            
+            if not all_emails_with_status:
+                return jsonify({"success": False, "error": "No emails found"}), 404
+            
+            return jsonify({"success": True, "emails": [email.to_dict() for email in all_emails_with_status]}), 200
+        

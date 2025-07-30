@@ -36,7 +36,25 @@ class EmailsRepository:
         
     def get_by_id(): pass
     
-    def get_all(): pass
+    def get_all(self, status=None):
+        """ Get all emails from the database. """
+        try:
+            if not status:
+                emails = self.session.query(EmailsModel).all()
+                return emails
+            else:
+                if isinstance(status, str):
+                    status = EmailStatus(status)
+                    
+                emails_with_status = self.session.query(EmailsModel).filter(
+                    EmailsModel.status == status
+                ).all()
+                
+                return emails_with_status
+        except Exception as e:
+            return False, str(e)
+        finally:
+            self.session.close()
     
     def update(): pass
     
