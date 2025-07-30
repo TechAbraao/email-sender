@@ -28,8 +28,8 @@
 
 #### Para inicializar o Celery com a UI do Flower:
 Na raiz do projeto, insira:
-``bash
+```bash
 celery -A src.app.celery_app.celery_app flower
 # ou
 celery -A src.app.celery_app:celery_app worker --loglevel=info
-``
+```

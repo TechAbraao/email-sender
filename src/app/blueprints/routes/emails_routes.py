@@ -12,11 +12,9 @@ controller = EmailsController()
 @emails.route('/send', methods=['POST'])
 def post_send_email(): return controller.send_email(request.get_json())
 
-
-@emails.route('/schedule', methods=['GET'])
-def get_schedule_email():
-    """ Route to get scheduled e-mails (not implemented yet) """
-    return {"message": "This feature is not implemented yet"}, 501
+""" Route to send an schedule e-mail """
+@emails.route('/schedule', methods=['POST'])
+def get_schedule_email(): return controller.send_scheduled_email(request.get_json())
 
 @emails.route('/schedule', methods=['POST'])
 def post_schedule_email():

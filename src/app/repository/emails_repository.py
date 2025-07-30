@@ -18,8 +18,8 @@ class EmailsRepository:
                 to=email.get("to"),
                 body=email.get("body"),
                 content_type=EmailContentType(email.get("content_type")),
-                scheduled_for=datetime.now(ZoneInfo("America/Sao_Paulo")),
-                status=EmailStatus.SENT,
+                scheduled_for=email.get("schedule_time", datetime.now(ZoneInfo("America/Sao_Paulo"))),
+                status=email.get("status", EmailStatus.FAILED),
                 created_at=datetime.now(ZoneInfo("America/Sao_Paulo")),
             )
             self.session.add(creating_email)
