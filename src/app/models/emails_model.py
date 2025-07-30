@@ -2,7 +2,6 @@ from sqlalchemy import Column, String, DateTime, UUID, Enum as SQLAlchemyEnum
 from src.app.database.configs_database import Base
 from enum import Enum as PyEnum
 
-
 class EmailStatus(PyEnum):
     """ Enum for email status """
     PENDING = "pending"
@@ -25,4 +24,5 @@ class EmailsModel(Base):
     content_type = Column(SQLAlchemyEnum(EmailContentType), nullable=False)
     scheduled_for = Column(DateTime, nullable=True)
     status = Column(SQLAlchemyEnum(EmailStatus), default=EmailStatus.SENT, nullable=False)
+    task_id = Column(UUID, nullable=True, unique=True)
     created_at = Column(DateTime, nullable=False)

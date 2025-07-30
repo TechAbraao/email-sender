@@ -3,7 +3,7 @@ from src.app.validators.emails import EmailsValidator
 from src.app.services.emails_services import EmailsService
 from src.app.repository.emails_repository import EmailsRepository
 from src.app.models.emails_model import EmailContentType
-from src.app.tasks.emails_tasks import send_email_task
+from src.app.tasks.emails_tasks import send_email_task, update_database_status_success_task, update_database_status_failure_task
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -25,15 +25,23 @@ class EmailsController():
             return jsonify({"success": False, "errors": "Invalid content type"}), 400
         
         """ Using .delay() to send the email asynchronously """
-        sending_email = send_email_task.delay(email_body)
+        sending_email = send_email_task.delay(
+            email_body
+            )
         
         """ Prepare the email body for saving in the database """
         email_body["content_type"] = EmailContentType(email_body["content_type"])
+        email_body["status"] = "SENT"
+        email_body["task_id"] = sending_email.id
+        
         saving_email_record = self.repository.create(email_body)
         if not saving_email_record[0]:
             return jsonify({"success": saving_email_record[0], "error": saving_email_record[1]}), 500
         
-        return jsonify({"message": "E-mail sent successfully."}), 200
+        return jsonify({
+            "message": "E-mail sent successfully.",
+            "task_id": sending_email.id,
+            }), 200
     
     """ Schedule an e-mail (not implemented yet) """
     def send_scheduled_email(self, email_body: dict):
@@ -56,11 +64,17 @@ class EmailsController():
             return jsonify({"success": False, "error": "Scheduled time must be in the future"}), 400
 
         """ Using .apply_async() to schedule the task """
-        sending_email = send_email_task.apply_async(args=[email_body], eta=time_now + delta)
+        sending_email = send_email_task.apply_async(
+            args=[email_body], 
+            eta=time_now + delta,
+            link=update_database_status_success_task.s(),
+            link_error=update_database_status_failure_task.s()
+            )
         
         """ Prepare the email body for saving in the database """
         email_body["content_type"] = EmailContentType(email_body["content_type"])
         email_body["status"] = "PENDING"
+        email_body["task_id"] = sending_email.id
         
         saving_email_record = self.repository.create(email_body)
         if not saving_email_record[0]:

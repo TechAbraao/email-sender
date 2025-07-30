@@ -20,6 +20,7 @@ class EmailsRepository:
                 content_type=EmailContentType(email.get("content_type")),
                 scheduled_for=email.get("schedule_time", datetime.now(ZoneInfo("America/Sao_Paulo"))),
                 status=email.get("status", EmailStatus.FAILED),
+                task_id=email.get("task_id", None),
                 created_at=datetime.now(ZoneInfo("America/Sao_Paulo")),
             )
             self.session.add(creating_email)
@@ -38,5 +39,20 @@ class EmailsRepository:
     def get_all(): pass
     
     def update(): pass
+    
+    def update_status_by_task_id(self, task_id: str, status: str): 
+        """ Update the email status in the database by task ID. """
+        try:
+            email = self.session.query(EmailsModel).filter(EmailsModel.task_id == task_id).first()
+            if not email:
+                return False, "E-mail not found"
+            email.status = status
+            self.session.commit()
+            return True, "E-mail status updated successfully"
+        except Exception as e:
+            self.session.rollback()
+            return False, str(e)
+        finally:
+            self.session.close()
     
     def delete(): pass

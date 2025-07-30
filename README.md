@@ -18,18 +18,21 @@
 
 #### Emails
 
-| Método | URL                                         | Descrição                                         |
-| ------ | ------------------------------------------- | ------------------------------------------------- |
-| POST   | `/api/emails/send`                          | Enviar e-mail                                     |
-| POST   | `/api/emails/schedule`                      | Agendar envio de e-mail                           |
-| GET    | `/api/emails/schedule`                      | Listar e-mails agendados ou enviados              |
-| DELETE | `/api/emails/schedule/<string:schedule_id>` | Cancelar envio de e-mail agendado                 |
-| GET    | `/api/emails/<string:email_id>`             | Buscar e-mail específico                          |
+| Method | URL                                         | Description                    |
+| ------ | ------------------------------------------- | ------------------------------ |
+| POST   | `/api/emails/send`                          | Send email                     |
+| POST   | `/api/emails/schedule`                      | Schedule email sending         |
+| GET    | `/api/emails/schedule`                      | List scheduled or sent emails  |
+| DELETE | `/api/emails/schedule/<string:schedule_id>` | Cancel scheduled email sending |
+| GET    | `/api/emails/<string:email_id>`             | Retrieve specific email        |
 
-#### Para inicializar o Celery com a UI do Flower:
-Na raiz do projeto, insira:
+#### To start Celery with the Flower UI:
 ```bash
-celery -A src.app.celery_app.celery_app flower
-# ou
+# Start the Celery App
 celery -A src.app.celery_app:celery_app worker --loglevel=info
+```
+In another terminal, I also ran:
+```bash
+# Now, start the Flower UI
+celery -A src.app.celery_app.celery_app flower
 ```
