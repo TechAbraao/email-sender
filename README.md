@@ -26,4 +26,10 @@
 | DELETE | `/api/emails/schedule/<string:schedule_id>` | Cancelar envio de e-mail agendado                 |
 | GET    | `/api/emails/<string:email_id>`             | Buscar e-mail específico                          |
 
-
+#### Para inicializar o Celery com a UI do Flower:
+Na raiz do projeto, insira:
+``bash
+celery -A src.app.celery_app.celery_app flower
+# ou
+celery -A src.app.celery_app:celery_app worker --loglevel=info
+``

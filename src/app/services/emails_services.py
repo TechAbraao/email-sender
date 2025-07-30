@@ -31,6 +31,7 @@ class EmailsService:
             return True, {"message": "E-mail sent successfully"}
         except Exception as err:
             return False, {"error": str(err)}
+
         
     def __mime_type(self, body: str, content_type: str) -> MIMEText:
         """ Returns a MIMEText object based on the content type. """
