@@ -10,7 +10,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class EmailsController():
+class EmailsController:
     """ This file contains the EmailsController class which handles email-related operations. """
     def __init__(self):
         self.service = EmailsService()
@@ -114,7 +114,10 @@ class EmailsController():
         if not uuid_bool:
             return jsonify({"success": False, "error": "This field is not UUID."}), 500
 
-        # 1. Colocar aqui uma função que verifica se o UUID do Email existe antes de prosseguir.
+
+        id_email_exists, id_email_exists_msg = self.validator.validate_id_email_exists(uuid)
+        if not id_email_exists:
+            return jsonify({"status": False, "message": "The UUID for this email was not found in the database."})
 
         email = self.repository.get_by_id(uuid_value)
         if not email:
@@ -123,20 +126,31 @@ class EmailsController():
         return jsonify({"success": True, "message": email[1]})
     
     def delete_schedule_email(self, task_id: str):
+        # Planos para futuro aqui é padronizar esses logs.
         uuid_bool, uuid_value = self.validator.validating_uuid(task_id)
         if not uuid_bool:
             logger.error(f"\033[91m[CONTROLLER] Validação mal-sucedida: task_id '{task_id}' é inválido.\033[0m")
             return jsonify({"success": False, "error": "This field is not UUID."}), 500
         logger.info(f"\033[92m[CONTROLLER] Validação bem-sucedida: task_id '{task_id}' é válido.\033[0m")
 
-        success, msg = self.service.validate_task_id_exists(uuid_value)
+        success, msg = self.validator.validate_task_id_exists(uuid_value)
         if not success:
             logger.error(f"\033[91m[CONTROLLER] Validação mal-sucedida: task_id '{task_id}' não identificado na base de dados.\033[0m")
             return jsonify({"success": False, "message": "Task ID not found in database."})
         logger.info(f"\033[92m[CONTROLLER] Validação bem-sucedida: task_id '{task_id}' localizado na base de dados.\033[0m")
 
+        status, msg_status = self.repository.get_by_task_id(task_id)
+        if msg_status == "canceled":
+            logger.error(f"\033[91m[CONTROLLER] Validação mal-sucedida: task_id '{task_id}' já consta com seu agendamento cancelado.\033[0m")
+            return jsonify({"success": True, "message": "Email already appears as canceled."})
+        logger.info(f"\033[92m[CONTROLLER] Validação bem-sucedida: task_id '{task_id}' consta como pendente.\033[0m")
+
+
         canceling_email = self.service.cancel_email_scheduling(task_id=task_id)
         if not canceling_email:
+            logger.error(
+                f"\033[91m[CONTROLLER] Validação mal-sucedida: task_id '{task_id}' obteve erro ao cancelar email.\033[0m")
             return jsonify({"success": False, "error": "Email cancellation an unexpected error occurred"}), 500
-        
-        return jsonify({"success": True, "message": msg})
+
+        logger.info(f"\033[92m[CONTROLLER] Validação bem-sucedida: task_id '{task_id}' teve email cancelado com sucesso.\033[0m")
+        return jsonify({"success": True, "message": "Email cancel success."})

@@ -49,16 +49,6 @@ class EmailsService:
         except Exception as e:
             return False, str(e)
 
-    def validate_task_id_exists(self, task_id: str) -> tuple[bool, str]:
-        """ """
-        try:
-            exists, msg = self.repository.verify_exists_task_id(task_id)
-            if not exists:
-                return False, "ID does not exist in the database"
-            return True, "ID exists in the database"
-        except Exception as e:
-            return False, f"Database error: {str(e)}"
-
     def __mime_type(self, body: str, content_type: str) -> MIMEText:
         """ Returns a MIMEText object based on the content type. """
         if content_type == "text/plain":

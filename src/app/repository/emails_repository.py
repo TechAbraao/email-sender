@@ -47,7 +47,16 @@ class EmailsRepository:
             return False, str(e)
         finally:
             self.session.close()
-    
+
+    def get_by_task_id(self, task_id) -> tuple[bool, str]:
+        try:
+            check_status = self.session.query(EmailsModel).filter(
+                EmailsModel.task_id == task_id
+            ).first()
+            return True, check_status.to_dict().get("status")
+        except Exception as e:
+            return False, str(e)
+
     def get_all(self, status=None):
         """ Get all emails from the database. """
         try:
