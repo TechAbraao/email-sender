@@ -62,7 +62,7 @@ RABBITMQ_DEFAULT_PASS=root # This is the default PASSWORD. Change it if necessar
 ##### 2. Under construction
 
 #### About messaging architecture
-Consume the message and send the emailThis messaging architecture uses Flask as the application framework, RabbitMQ as the message broker, and Celery as the worker queue for processing asynchronous tasks like sending emails and schedules.
+This messaging architecture uses Flask as the application framework, RabbitMQ as the message broker, and Celery as the worker queue for processing asynchronous tasks like sending emails and schedules.
 
 ```mermaid
 graph LR
