@@ -33,7 +33,11 @@ start-celery:
 	$(VENV_DIR)/bin/celery -A $(CELERY_PATH) worker --loglevel=info
 
 start-flower:
-	$(VENV_DIR)/bin/celery -A $(CELERY_PATH) flower
+	.venv/bin/celery --broker=amqp://root:root@localhost:5672/ \
+		-A src.app.celery_app.celery_app flower \
+		--broker_api=http://root:root@localhost:15672/api/ \
+		--address=127.0.0.1 \
+		--port=5555
 
 start-tests:
 	$(VENV_PYTHON) -m pytest

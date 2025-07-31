@@ -6,6 +6,8 @@ from src.app.models.emails_model import EmailContentType
 from src.app.tasks.emails_tasks import send_email_task, update_database_status_success_task, update_database_status_failure_task
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from celery.result import AsyncResult
+from src.app.celery_app import celery_app
 
 class EmailsController():
     """ This file contains the EmailsController class which handles email-related operations. """
@@ -116,3 +118,12 @@ class EmailsController():
             return jsonify({"success": False, "error": "Unable to find email."}), 204
         
         return jsonify({"success": True, "message": email[1]})
+    
+    def delete_schedule_email(self, task_id: str):
+        uuid_bool, uuid_value = self.validator.validating_uuid(task_id)
+        if not uuid_bool:
+            return jsonify({"success": False, "error": "This field is not UUID."}), 500
+    
+        AsyncResult(task_id, app=celery_app).revoke()
+    
+        return jsonify({"success": True, "message": uuid_value})

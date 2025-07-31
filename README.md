@@ -4,8 +4,8 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/Python-grey?style=flat&logo=Python">
     <img alt="Static Badge" src="https://img.shields.io/badge/Flask-grey?style=flat&logo=Flask">
     <img alt="Static Badge" src="https://img.shields.io/badge/Celery-grey?style=flat&logo=Celery">
-    <img alt="Static Badge" src="https://img.shields.io/badge/smtplib-grey?style=flat&logo=Python">
-    <img alt="Static Badge" src="https://img.shields.io/badge/kombu-grey?style=flat&logo=Python">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Smtplib-grey?style=flat&logo=Python">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Kombu-grey?style=flat&logo=Python">
     <img alt="Static Badge" src="https://img.shields.io/badge/Pytest-grey?style=flat&logo=PyTest">
     <img alt="Static Badge" src="https://img.shields.io/badge/Marshmallow-grey?style=flat&logo=Python">
     <img alt="Static Badge" src="https://img.shields.io/badge/SQLALchemy-grey?style=flat&logo=SQLAlchemy">
@@ -82,4 +82,4 @@ graph LR
 | GET    | `/api/emails/<string:uuid_email>`            | Retrieve specific email        |
 | POST   | `/api/emails/send`                           | Send email                     |
 | POST   | `/api/emails/schedule`                       | Schedule email sending         |
-| DELETE | `/api/emails/schedule/<string:uuid_schedule>`| Cancel scheduled email sending |
+| DELETE | `/api/emails/schedule/<string:uuid_task>`    | Cancel scheduled email sending |

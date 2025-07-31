@@ -6,7 +6,7 @@ try:
     rabbit_settings = RabbitMQSettings()
     celery_app = Celery(
             namespace="celery", 
-            broker=f"amqp://{rabbit_settings.user}:{rabbit_settings.password}@{rabbit_settings.host}:{rabbit_settings.port}//", 
+            broker=f"amqp://{rabbit_settings.user}:{rabbit_settings.password}@{rabbit_settings.host}:{rabbit_settings.port}/", 
             backend=rabbit_settings.backend,
             include=["src.app.tasks.emails_tasks"]
             )

@@ -26,3 +26,5 @@ def post_send_email(): return controller.send_email(request.get_json())
 @emails.route('/schedule', methods=['POST'])
 def post_schedule_email(): return controller.send_scheduled_email(request.get_json())
 
+@emails.route('/schedule/<string:uuid_task>', methods=["DELETE"])
+def delete_schedule_email(uuid_task): return controller.delete_schedule_email(uuid_task)
