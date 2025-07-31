@@ -13,8 +13,10 @@ controller = EmailsController()
 def get_all_emails(): 
     status = request.args.get("status", default=None)
     # to = request.args.get("to", None)
-    
     return controller.get_all_emails(status=status)
+
+@emails.route("/<string:uuid_email>", methods = ["GET"])
+def get_email_by_uuid(uuid_email: str): return controller.get_email_by_uuid(uuid_email)
 
 """  Route to send an e-mail """
 @emails.route('/send', methods=['POST'])

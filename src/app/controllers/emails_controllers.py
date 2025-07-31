@@ -105,3 +105,14 @@ class EmailsController():
             
             return jsonify({"success": True, "emails": [email.to_dict() for email in all_emails_with_status]}), 200
         
+    """ """
+    def get_email_by_uuid(self, uuid: str):
+        uuid_bool, uuid_value = self.validator.validating_uuid(uuid)
+        if not uuid_bool:
+            return jsonify({"success": False, "error": "This field is not UUID."}), 500
+        
+        email = self.repository.get_by_id(uuid_value)
+        if not email:
+            return jsonify({"success": False, "error": "Unable to find email."}), 204
+        
+        return jsonify({"success": True, "message": email[1]})

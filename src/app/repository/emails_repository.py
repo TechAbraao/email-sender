@@ -34,7 +34,17 @@ class EmailsRepository:
         finally:
             self.session.close()
         
-    def get_by_id(): pass
+    def get_by_id(self, uuid) -> tuple[bool, dict]: 
+        try:
+            email = self.session.query(EmailsModel).filter(
+                EmailsModel.id == uuid
+            ).first()
+            return True, email.to_dict()
+        except Exception as e:
+            self.session.rollback()
+            return False, str(e)
+        finally:
+            self.session.close()
     
     def get_all(self, status=None):
         """ Get all emails from the database. """

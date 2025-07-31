@@ -18,7 +18,6 @@ class EmailBody(Schema):
             "to": self.to,
         }
         
-
 class EmailScheduleBodyStatus(Enum):
     """ Enum for email schedule status """
     PENDING = "PENDING"
@@ -32,3 +31,6 @@ class EmailScheduleBody(Schema):
     content_type = fields.Str(required=True, validate=lambda x: x in ["text/plain", "text/html"], metadata={"description": "MIME type of the body: 'text/plain' or 'text/html'"})
     to = fields.Email(required=True, metadata={"description": "Recipient's e-mail address"})
     schedule_time = fields.DateTime(required=True, metadata={"description": "Scheduled time for sending the e-mail"})
+
+class UUIDField(Schema):
+    id = fields.UUID(required=True)
