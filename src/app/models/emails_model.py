@@ -6,6 +6,7 @@ class EmailStatus(PyEnum):
     """ Enum for email status """
     PENDING = "pending"
     SENT = "sent"
+    CANCELED = "canceled"
     FAILED = "failed"
 
 class EmailContentType(PyEnum):
@@ -23,7 +24,7 @@ class EmailsModel(Base):
     body = Column(String(2000), nullable=False)
     content_type = Column(SQLAlchemyEnum(EmailContentType), nullable=False)
     scheduled_for = Column(DateTime, nullable=True)
-    status = Column(SQLAlchemyEnum(EmailStatus), default=EmailStatus.SENT, nullable=False)
+    status = Column(SQLAlchemyEnum(EmailStatus, name="emailstatus"), default=EmailStatus.SENT, nullable=False)
     task_id = Column(UUID, nullable=True, unique=True)
     created_at = Column(DateTime, nullable=False)
     

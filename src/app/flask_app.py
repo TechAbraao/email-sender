@@ -1,7 +1,9 @@
 from flask import Flask
 from src.app.blueprints.routes.emails_routes import emails
+from src.app.logs.setup_logger import setup_logging
 
 def create_app() -> Flask:
+    setup_logging()
     app = Flask(__name__)
     app.register_blueprint(emails)
     return app

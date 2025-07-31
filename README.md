@@ -5,6 +5,7 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/Flask-grey?style=flat&logo=Flask">
     <img alt="Static Badge" src="https://img.shields.io/badge/Celery-grey?style=flat&logo=Celery">
     <img alt="Static Badge" src="https://img.shields.io/badge/Smtplib-grey?style=flat&logo=Python">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Logging-grey?style=flat&logo=Python"> 
     <img alt="Static Badge" src="https://img.shields.io/badge/Kombu-grey?style=flat&logo=Python">
     <img alt="Static Badge" src="https://img.shields.io/badge/Pytest-grey?style=flat&logo=PyTest">
     <img alt="Static Badge" src="https://img.shields.io/badge/Marshmallow-grey?style=flat&logo=Python">

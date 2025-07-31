@@ -6,8 +6,9 @@ from src.app.models.emails_model import EmailContentType
 from src.app.tasks.emails_tasks import send_email_task, update_database_status_success_task, update_database_status_failure_task
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from celery.result import AsyncResult
-from src.app.celery_app import celery_app
+import logging
+
+logger = logging.getLogger(__name__)
 
 class EmailsController():
     """ This file contains the EmailsController class which handles email-related operations. """
@@ -112,7 +113,9 @@ class EmailsController():
         uuid_bool, uuid_value = self.validator.validating_uuid(uuid)
         if not uuid_bool:
             return jsonify({"success": False, "error": "This field is not UUID."}), 500
-        
+
+        # 1. Colocar aqui uma função que verifica se o UUID do Email existe antes de prosseguir.
+
         email = self.repository.get_by_id(uuid_value)
         if not email:
             return jsonify({"success": False, "error": "Unable to find email."}), 204
@@ -122,8 +125,18 @@ class EmailsController():
     def delete_schedule_email(self, task_id: str):
         uuid_bool, uuid_value = self.validator.validating_uuid(task_id)
         if not uuid_bool:
+            logger.error(f"\033[91m[CONTROLLER] Validação mal-sucedida: task_id '{task_id}' é inválido.\033[0m")
             return jsonify({"success": False, "error": "This field is not UUID."}), 500
-    
-        AsyncResult(task_id, app=celery_app).revoke()
-    
-        return jsonify({"success": True, "message": uuid_value})
+        logger.info(f"\033[92m[CONTROLLER] Validação bem-sucedida: task_id '{task_id}' é válido.\033[0m")
+
+        success, msg = self.service.validate_task_id_exists(uuid_value)
+        if not success:
+            logger.error(f"\033[91m[CONTROLLER] Validação mal-sucedida: task_id '{task_id}' não identificado na base de dados.\033[0m")
+            return jsonify({"success": False, "message": "Task ID not found in database."})
+        logger.info(f"\033[92m[CONTROLLER] Validação bem-sucedida: task_id '{task_id}' localizado na base de dados.\033[0m")
+
+        canceling_email = self.service.cancel_email_scheduling(task_id=task_id)
+        if not canceling_email:
+            return jsonify({"success": False, "error": "Email cancellation an unexpected error occurred"}), 500
+        
+        return jsonify({"success": True, "message": msg})

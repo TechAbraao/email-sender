@@ -1,3 +1,5 @@
+from tornado.process import task_id
+
 from src.app.database.configs_database import SessionLocal
 from src.app.models.emails_model import EmailsModel, EmailContentType, EmailStatus
 from uuid import uuid4
@@ -66,7 +68,7 @@ class EmailsRepository:
         finally:
             self.session.close()
     
-    def update(): pass
+    def update(self): pass
     
     def update_status_by_task_id(self, task_id: str, status: str): 
         """ Update the email status in the database by task ID. """
@@ -74,7 +76,13 @@ class EmailsRepository:
             email = self.session.query(EmailsModel).filter(EmailsModel.task_id == task_id).first()
             if not email:
                 return False, "E-mail not found"
-            email.status = status
+            
+            try:
+                enum_status = EmailStatus(status.lower())
+            except ValueError as e:
+                return False, f"Invalid status: '{status}'"
+
+            email.status = enum_status
             self.session.commit()
             return True, "E-mail status updated successfully"
         except Exception as e:
@@ -82,5 +90,15 @@ class EmailsRepository:
             return False, str(e)
         finally:
             self.session.close()
-    
-    def delete(): pass
+
+    def verify_exists_task_id(self, task_id: str) -> tuple[bool, str]:
+        try:
+            exists = self.session.query(EmailsModel).filter(EmailsModel.task_id == task_id).first()
+            if exists:
+                return True, "Found"
+            return False, "Not Found"
+        except Exception as e:
+            self.session.rollback()
+            return False, str(e)
+
+    def delete(self): pass

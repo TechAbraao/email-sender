@@ -1,0 +1,2 @@
+
+class ColorsLogger: pass

@@ -1,7 +1,7 @@
 from src.app.schemas.emails_schemas import EmailBody, EmailScheduleBody, UUIDField
 from marshmallow import ValidationError
 
-class EmailsValidator():
+class EmailsValidator:
     """ Validator for email-related operations """
     def __init__(self):
         self.email_body = EmailBody()
@@ -29,7 +29,7 @@ class EmailsValidator():
             return True, uuid_validated["id"]
         except ValidationError as e:
             return False, str(e)
-    
+
     """ Validate the schedule email body """
     def validate_schedule_email_body(self, body: dict) -> tuple[bool, dict | str]:
         try:

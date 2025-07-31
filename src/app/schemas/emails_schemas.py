@@ -22,6 +22,7 @@ class EmailScheduleBodyStatus(Enum):
     """ Enum for email schedule status """
     PENDING = "PENDING"
     SENT = "SENT"
+    CANCELED = "CANCELED"
     FAILED = "FAILED"
 
 class EmailScheduleBody(Schema):
