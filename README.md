@@ -17,7 +17,63 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/Postman-grey?style=flat&logo=Postman">
 </section>
 
-#### Emails
+### Technologies
+- __List all emails:__ Retrieve all sent or scheduled emails, with the option to filter by status (e.g., sent, pending, failed).
+- __Get specific email details:__ Fetch detailed information of a specific email using its unique identifier (UUID).
+- __Immediate email sending:__ Enable sending an email instantly through the dedicated endpoint.
+- __Schedule email sending:__ Support scheduling emails to be sent at future times, facilitating campaigns or timed notifications.
+- __Cancel scheduled emails:__ Allow cancellation of previously scheduled emails by referencing the schedule’s UUID.
+
+#### Installation Guide
+##### 1. Configure ```.env.example``` and rename it to ```.env```
+```bash
+# Default App Flask Configurations
+FLASK_APP=src.app.flask_app:create_app
+FLASK_ENV=development
+FLASK_DEBUG=1
+PYTHONPATH=.
+
+# E-mail Configuration
+SMTP_SERVER=    # Example: smtp.gmail.com
+SMTP_PORT=
+SMTP_EMAIL=
+SMTP_PASSWORD=
+
+# Database PostgreSQL and PGAdmin4 Configurations
+## PostgreSQL Configurations
+DATABASE_HOST=
+DATABASE_PORT=
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABASE_NAME=
+## PGAdmin4 Configurations
+PGADMIN_EMAIL=admin@admin.com # This is the default E-MAIL. Change it if necessary.
+PGADMIN_PASSWORD=admin # This is the default PASSWORD. Change it if necessary.
+PGADMIN_HOST=5050 # This is the default HOST. Change it if necessary.
+PGADMIN_PORT=80 # This is the default PORT. Change it if necessary.
+
+# RabbitMQ Configuration
+RABBITMQ_DEFAULT_HOST=localhost # This is the default HOST. Change it if necessary.
+RABBITMQ_DEFAULT_PORT=5672 # This is the default PORT. Change it if
+RABBITMQ_DEFAULT_NAME=celery # This is the default NAME. Change it if necessary.
+RABBITMQ_DEFAULT_USER=root # This is the default USER. Change it if necessary.
+RABBITMQ_DEFAULT_PASS=root # This is the default PASSWORD. Change it if necessary.
+```
+##### 2. Under construction
+
+#### About messaging architecture
+Consume the message and send the emailThis messaging architecture uses Flask as the application framework, RabbitMQ as the message broker, and Celery as the worker queue for processing asynchronous tasks like sending emails and schedules.
+
+```mermaid
+graph LR
+  Producer["Producer:<br><b>Flask Application</b>"] -->|Message| Exchange["Exchange:<br><b>RabbitMQ</b>"]
+  Exchange -->|Route the message| Queue["Queue:<br><b>RabbitMQ</b>"]
+  Queue -->|Message| Worker["Worker:<br><b>Celery Application</b>"]
+
+```
+
+#### Endpoints
+#### E-mails
 
 | Method | URL                                          |     Description                |
 | ------ | -------------------------------------------- | ------------------------------ |
@@ -27,24 +83,3 @@
 | POST   | `/api/emails/send`                           | Send email                     |
 | POST   | `/api/emails/schedule`                       | Schedule email sending         |
 | DELETE | `/api/emails/schedule/<string:uuid_schedule>`| Cancel scheduled email sending |
-
-#### To start Celery with the Flower UI:
-```bash
-# Start the Celery App
-celery -A src.app.celery_app:celery_app worker --loglevel=info
-```
-In another terminal, I also ran:
-```bash
-# Now, start the Flower UI
-celery -A src.app.celery_app.celery_app flower
-```
-Consume the message and send the emailThis messaging architecture uses Flask as the application framework, RabbitMQ as the message broker, and Celery as the worker queue for processing asynchronous tasks like sending emails and schedules.
-#### About messaging architecture
-
-```mermaid
-graph LR
-  Producer["Producer:<br><b>Flask Application</b>"] -->|Message| Exchange["Exchange:<br><b>RabbitMQ</b>"]
-  Exchange -->|Route the message| Queue["Queue:<br><b>RabbitMQ</b>"]
-  Queue -->|Message| Worker["Worker:<br><b>Celery Application</b>"]
-
-```
