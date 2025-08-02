@@ -43,4 +43,4 @@ start-tests:
 	$(VENV_PYTHON) -m pytest
 
 start-tables:
-	PYTHONPATH=src $(VENV_PYTHON) -c "from app.database.init_db import init_db; init_db()"
+	PYTHONPATH=. $(VENV_PYTHON) ./scripts/table_initializer.py
