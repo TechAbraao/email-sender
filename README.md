@@ -28,7 +28,7 @@
 #### Installation Guide
 ##### 1. Clone this repository
 ```bash
-git clone https://github.com/TechAbraao/flash-cards-rest-api.git
+git clone https://github.com/TechAbraao/email-sender-rest-api.git
 ```
 
 ##### 2. Check out the manual installation:
