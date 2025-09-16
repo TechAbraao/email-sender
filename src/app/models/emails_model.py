@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, DateTime, UUID, Enum as SQLAlchemyEnum
-from src.app.database.configs_database import Base
+from src.app.utils.extesions import db
 from enum import Enum as PyEnum
+
 
 class EmailStatus(PyEnum):
     """ Enum for email status """
@@ -14,19 +15,19 @@ class EmailContentType(PyEnum):
     TEXT = "text/plain"
     HTML = "text/html"
 
-class EmailsModel(Base):
+class EmailsModel(db.Model):
     """ Model for Emails """
     __tablename__ = 'emails'
     
-    id = Column(UUID, primary_key=True)
-    subject = Column(String(40), nullable=False) 
-    to = Column(String(100), nullable=False)
-    body = Column(String(2000), nullable=False)
-    content_type = Column(SQLAlchemyEnum(EmailContentType), nullable=False)
-    scheduled_for = Column(DateTime, nullable=True)
-    status = Column(SQLAlchemyEnum(EmailStatus, name="emailstatus"), default=EmailStatus.SENT, nullable=False)
-    task_id = Column(UUID, nullable=True, unique=True)
-    created_at = Column(DateTime, nullable=False)
+    id = db.Column(UUID, primary_key=True)
+    subject = db.Column(String(40), nullable=False)
+    to = db.Column(String(100), nullable=False)
+    body = db.Column(String(2000), nullable=False)
+    content_type = db.Column(SQLAlchemyEnum(EmailContentType), nullable=False)
+    scheduled_for = db.Column(DateTime, nullable=True)
+    status = db.Column(SQLAlchemyEnum(EmailStatus, name="emailstatus"), default=EmailStatus.SENT, nullable=False)
+    task_id = db.Column(UUID, nullable=True, unique=True)
+    created_at = db.Column(DateTime, nullable=False)
     
     def to_dict(self):
         return {

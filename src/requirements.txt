@@ -1,3 +1,4 @@
+alembic==1.16.5
 amqp==5.3.1
 billiard==4.2.1
 blinker==1.9.0
@@ -7,6 +8,9 @@ click-didyoumean==0.3.1
 click-plugins==1.1.1.2
 click-repl==0.3.0
 Flask==3.1.1
+flask-marshmallow==1.3.0
+Flask-Migrate==4.1.0
+Flask-SQLAlchemy==3.1.1
 flower==2.0.1
 greenlet==3.2.3
 humanize==4.12.3
@@ -14,8 +18,10 @@ iniconfig==2.1.0
 itsdangerous==2.2.0
 Jinja2==3.1.6
 kombu==5.5.4
+Mako==1.3.10
 MarkupSafe==3.0.2
 marshmallow==4.0.0
+marshmallow-sqlalchemy==1.4.2
 packaging==25.0
 pluggy==1.6.0
 prometheus_client==0.22.1

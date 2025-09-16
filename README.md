@@ -1,9 +1,15 @@
-# E-mail Sender REST API
+# E-mail Sender Web Application
+
 ### Technologies
+
 <section align="left">
     <img alt="Static Badge" src="https://img.shields.io/badge/Python-grey?style=flat&logo=Python">
-<img alt="Static Badge" src="https://img.shields.io/badge/JavaScript-grey?style=flat&logo=JavaScript">
+    <img alt="Static Badge" src="https://img.shields.io/badge/JavaScript-grey?style=flat&logo=JavaScript">
+    <img alt="Static Badge" src="https://img.shields.io/badge/JQuery-grey?style=flat&logo=JQuery">
     <img alt="Static Badge" src="https://img.shields.io/badge/Flask-grey?style=flat&logo=Flask">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Flask--Marshmallow-grey?style=flat&logo=Flask">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Flask--Migrate-grey?style=flat&logo=Flask">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Flask--SQLAlchemy-grey?style=flat&logo=Flask">
     <img alt="Static Badge" src="https://img.shields.io/badge/Jinja2-grey?style=flat&logo=Jinja">
     <img alt="Static Badge" src="https://img.shields.io/badge/Celery-grey?style=flat&logo=Celery">
     <img alt="Static Badge" src="https://img.shields.io/badge/Smtplib-grey?style=flat&logo=Python">
@@ -11,8 +17,6 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/Kombu-grey?style=flat&logo=Python">
     <img alt="Static Badge" src="https://img.shields.io/badge/Pytest-grey?style=flat&logo=PyTest">
     <img alt="Static Badge" src="https://img.shields.io/badge/TailwindCSS-grey?style=flat&logo=TailwindCSS">
-    <img alt="Static Badge" src="https://img.shields.io/badge/Marshmallow-grey?style=flat&logo=Python">
-    <img alt="Static Badge" src="https://img.shields.io/badge/SQLALchemy-grey?style=flat&logo=SQLAlchemy">
     <img alt="Static Badge" src="https://img.shields.io/badge/Docker-grey?style=flat&logo=Docker">
     <img alt="Static Badge" src="https://img.shields.io/badge/Redis-grey?style=flat&logo=Redis">
     <img alt="Static Badge" src="https://img.shields.io/badge/PostgreSQL-grey?style=flat&logo=PostgreSQL">
@@ -31,7 +35,7 @@
 #### Installation Guide
 ##### 1. Clone this repository
 ```bash
-git clone https://github.com/TechAbraao/email-sender-rest-api.git
+git clone https://github.com/TechAbraao/email-sender.git
 ```
 
 ##### 2. Check out the manual installation:

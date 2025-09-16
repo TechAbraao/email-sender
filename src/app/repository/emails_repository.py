@@ -1,6 +1,6 @@
 from tornado.process import task_id
 
-from src.app.database.configs_database import SessionLocal
+from src.app.utils.extesions import db
 from src.app.models.emails_model import EmailsModel, EmailContentType, EmailStatus
 from uuid import uuid4
 from datetime import datetime
@@ -8,7 +8,7 @@ from zoneinfo import ZoneInfo
 
 class EmailsRepository:
     def __init__(self):
-        self.session = SessionLocal()
+        self.session = db.session
         self.validator = None
         
     def create(self, email) -> tuple[bool, str]:
