@@ -2,7 +2,9 @@
 ### Technologies
 <section align="left">
     <img alt="Static Badge" src="https://img.shields.io/badge/Python-grey?style=flat&logo=Python">
+<img alt="Static Badge" src="https://img.shields.io/badge/JavaScript-grey?style=flat&logo=JavaScript">
     <img alt="Static Badge" src="https://img.shields.io/badge/Flask-grey?style=flat&logo=Flask">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Jinja2-grey?style=flat&logo=Jinja">
     <img alt="Static Badge" src="https://img.shields.io/badge/Celery-grey?style=flat&logo=Celery">
     <img alt="Static Badge" src="https://img.shields.io/badge/Smtplib-grey?style=flat&logo=Python">
     <img alt="Static Badge" src="https://img.shields.io/badge/Logging-grey?style=flat&logo=Python"> 
