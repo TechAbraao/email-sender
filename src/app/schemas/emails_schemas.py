@@ -1,3 +1,4 @@
+from src.app.utils.extesions import ma
 from marshmallow import Schema, fields
 from marshmallow.validate import Length
 from enum import Enum
