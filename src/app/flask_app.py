@@ -1,5 +1,5 @@
 from flask import Flask
-from src.app.blueprints.routes.emails_routes import emails
+from src.app.blueprints.api.emails_routes import emails
 from src.app.logs.setup_logger import setup_logging
 
 def create_app() -> Flask:

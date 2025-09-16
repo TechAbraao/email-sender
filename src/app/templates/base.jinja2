@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Email Sender {% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% block scripts %}
+    {% endblock scripts %}
+</head>
+<body class="bg-black">
+    <header>
+        {% block sidenav %}
+        {% endblock sidenav %}
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <footer>
+        {% block footer %}
+        {% endblock footer %}
+    </footer>
+</body>
+</html>
