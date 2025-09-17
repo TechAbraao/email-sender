@@ -2,7 +2,7 @@ from flask import Flask
 
 from flask_migrate import Migrate
 from src.app.settings.database_settings import postgres_settings
-from src.app.logs.setup_logger import setup_logging
+from src.app.logger.setup_logger import setup_logging
 from src.app.utils.extesions import *
 from src.app.blueprints.all_blueprints import *
 
@@ -20,7 +20,7 @@ def create_app() -> Flask:
     from src.app.models.emails_model import EmailsModel
 
     app.register_blueprint(emails)
-    app.register_blueprint(emails_frontend)
+    app.register_blueprint(home_frontend)
     return app
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-# E-mail Sender Web Application
+# MailFlow | Sending and Scheduling Emails
 
 ### Technologies
 

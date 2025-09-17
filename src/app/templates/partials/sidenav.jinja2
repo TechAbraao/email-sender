@@ -1,15 +1,29 @@
 <nav class="w-full h-full">
-    <ul class="w-full h-full bg-green-500 flex gap-5 justify-center items-center">
+    <ul class="w-full h-full bg-green-500 flex gap-5 justify-end items-center pr-16">
         {% if strategy["url"] == "/emails" %}
-            <li>{{ buttons.button(endpoint="emails_frontend.views_email_history", text="Email History") }}</li>
-            <li>{{ buttons.button(endpoint="emails_frontend.views_configure_providers", text="Notification Providers") }}</li>
+            <li>{{ buttons.button(endpoint="home_frontend.views_emails_sender", text="Send Email") }}</li>
+            <li>{{ buttons.button(endpoint="home_frontend.views_email_history", text="History") }}</li>
+            {% if strategy.get("profile")["roles"] == "ADMIN" %}
+                <li>{{ buttons.button(endpoint="home_frontend.views_email_history", text="General History") }}</li>
+            {% endif %}
+            <li>{{ buttons.button(endpoint="home_frontend.views_configure_providers", text="Notification Providers") }}</li>
+            <li>{{ buttons.button(endpoint="home_frontend.views_email_history", text="Profile") }}</li>
         {% elif strategy["url"] == "/history" %}
-            <li>{{ buttons.button(endpoint="emails_frontend.views_emails_sender", text="Send Email") }}</li>
-            <li>{{ buttons.button(endpoint="emails_frontend.views_configure_providers", text="Notification Providers") }}</li>
+            <li>{{ buttons.button(endpoint="home_frontend.views_emails_sender", text="Send Email") }}</li>
+            <li>{{ buttons.button(endpoint="home_frontend.views_email_history", text="History") }}</li>
+            {% if strategy.get("profile")["roles"] == "ADMIN" %}
+                <li>{{ buttons.button(endpoint="home_frontend.views_email_history", text="General History") }}</li>
+            {% endif %}
+            <li>{{ buttons.button(endpoint="home_frontend.views_configure_providers", text="Notification Providers") }}</li>
+            <li>{{ buttons.button(endpoint="home_frontend.views_email_history", text="Profile") }}</li>
         {% elif strategy["url"] == "/providers" %}
-            <li>{{ buttons.button(endpoint="emails_frontend.views_emails_sender", text="Send Email") }}</li>
-            <li>{{ buttons.button(endpoint="emails_frontend.views_email_history", text="Email History") }}</li>
+            <li>{{ buttons.button(endpoint="home_frontend.views_emails_sender", text="Send Email") }}</li>
+            <li>{{ buttons.button(endpoint="home_frontend.views_email_history", text="History") }}</li>
+            {% if strategy.get("profile")["roles"] == "ADMIN" %}
+                <li>{{ buttons.button(endpoint="home_frontend.views_email_history", text="General History") }}</li>
+            {% endif %}
+            <li>{{ buttons.button(endpoint="home_frontend.views_configure_providers", text="Notification Providers") }}</li>
+            <li>{{ buttons.button(endpoint="home_frontend.views_email_history", text="Profile") }}</li>
         {% endif %}
-        <li>{{ buttons.button(endpoint="emails_frontend.views_email_history", text="Profile") }}</li>
     </ul>
 </nav>

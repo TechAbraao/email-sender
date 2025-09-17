@@ -126,7 +126,7 @@ class EmailsController:
         return jsonify({"success": True, "message": email[1]})
     
     def delete_schedule_email(self, task_id: str):
-        # Planos para futuro aqui é padronizar esses logs.
+        # Planos para futuro aqui é padronizar esses logger.
         uuid_bool, uuid_value = self.validator.validating_uuid(task_id)
         if not uuid_bool:
             logger.error(f"\033[91m[CONTROLLER] Validação mal-sucedida: task_id '{task_id}' é inválido.\033[0m")
