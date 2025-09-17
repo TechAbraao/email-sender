@@ -7,21 +7,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     {% block scripts %}
     {% endblock scripts %}
+    {% import "macros/buttons.jinja2" as buttons %}
 </head>
 <body class="w-full h-screen">
-    <header>
-        {% block sidenav %}
-        {% endblock sidenav %}
-    </header>
+<header class="w-full h-28 bg-red-500">
+    {% block sidenav %}
+    {% endblock sidenav %}
+</header>
 
-    <main>
-        {% block content %}
-        {% endblock content %}
-    </main>
+<main class="w-full h-3/4">
+    {% block content %}
+    {% endblock content %}
+</main>
 
-    <footer>
-        {% block footer %}
-        {% endblock footer %}
-    </footer>
+<footer class="w-full h-[135px] bg-red-400">
+    {% block footer %}
+    {% endblock footer %}
+</footer>
 </body>
 </html>

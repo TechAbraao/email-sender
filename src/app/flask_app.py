@@ -1,16 +1,15 @@
 from flask import Flask
-from src.app.blueprints.api.emails_routes import emails
+
 from flask_migrate import Migrate
 from src.app.settings.database_settings import postgres_settings
 from src.app.logs.setup_logger import setup_logging
 from src.app.utils.extesions import *
-from src.app.blueprints.frontend.emails_frontend import emails_frontend
+from src.app.blueprints.all_blueprints import *
 
 def create_app() -> Flask:
     app = Flask(__name__)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = postgres_settings.get_uri()
-
     setup_logging()
 
     db.init_app(app)

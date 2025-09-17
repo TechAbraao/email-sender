@@ -1,15 +1,23 @@
-{% extends "base.jinja2" %}
+{% extends "layouts/layout_default.jinja2" %}
 
 {% block title %}
-
+    Send Email | E-mails App
 {% endblock title %}
 
+{% block sidenav %}
+    {# Dynamic rendering from the backend #}
+    {% include "partials/sidenav.jinja2" %}
+    <script></script>
+{% endblock sidenav %}
+
 {% block content %}
-    <section>
-        <p>Hello, World!</p>
+    <section class="w-full h-full bg-purple-400">
+        <p>SEND EMAILS!</p>
     </section>
 {% endblock content %}
 
 {% block footer %}
-
+    <aside class="w-full h-full">
+        SEND EMAILS FOOTER!
+    </aside>
 {% endblock footer %}

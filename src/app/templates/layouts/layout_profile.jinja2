@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Default {% endblock title %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% block scripts %}
+    {% endblock scripts %}
+    {% import "macros/buttons.jinja2" as buttons %}
+</head>
+<body class="w-full h-screen">
+<header class="w-full h-28 bg-red-500">
+    {% block sidenav %}
+    {% endblock sidenav %}
+</header>
+
+<main class="w-full h-3/4">
+    {% block content %}
+        {% block profile_infos %}{% endblock profile_infos %}
+        {% block active_provider %} {% endblock active_provider %}
+    {% endblock content %}
+</main>
+</body>
+</html>

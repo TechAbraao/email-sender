@@ -1,0 +1,7 @@
+{% macro button(endpoint, text) %}
+    <button class="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600">
+        <a href="{{ url_for(endpoint) }}">
+            {{ text }}
+        </a>
+    </button>
+{% endmacro %}
